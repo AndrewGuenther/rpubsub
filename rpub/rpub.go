@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	c := rpubsub.BuildConn()
+	c, channel := rpubsub.BuildConn()
 	defer c.Close()
 
 	reader := bufio.NewReader(os.Stdin)
@@ -25,6 +25,6 @@ func main() {
 			}
 		}
 
-		c.Do("PUBLISH", os.Args[1], line)
+		c.Do("PUBLISH", channel, line)
 	}
 }
