@@ -6,14 +6,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/garyburd/redigo/redis"
+	"github.com/AndrewGuenther/rpubsub"
 )
 
 func main() {
-	c, err := redis.Dial("tcp", ":6379")
-	if err != nil {
-		log.Fatal(err)
-	}
+	c := rpubsub.BuildConn()
 	defer c.Close()
 
 	reader := bufio.NewReader(os.Stdin)
