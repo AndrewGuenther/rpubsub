@@ -2,7 +2,9 @@ package rpubsub
 
 import (
 	"flag"
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/garyburd/redigo/redis"
 )
@@ -12,7 +14,8 @@ func BuildConn() (redis.Conn, string) {
 	flag.Parse()
 
 	if len(flag.Args()) != 1 {
-		log.Fatal("Please specify a single channel")
+		fmt.Fprintln(os.Stderr, "Please specify a single channel.")
+		os.Exit(1)
 	}
 	var channel = flag.Args()[0]
 
