@@ -2,6 +2,8 @@ package main
 
 import (
 	"bufio"
+	"flag"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -10,6 +12,10 @@ import (
 )
 
 func main() {
+	flag.Usage = func() {
+		fmt.Fprintln(os.Stderr, "Usage: rpub [--host HOSTNAME:PORT] CHANNEL")
+		flag.PrintDefaults()
+	}
 	c, channel := rpubsub.BuildConn()
 	defer c.Close()
 

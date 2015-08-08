@@ -1,13 +1,19 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
 
 	"github.com/AndrewGuenther/rpubsub"
 	"github.com/garyburd/redigo/redis"
 )
 
 func main() {
+	flag.Usage = func() {
+		fmt.Fprintln(os.Stderr, "Usage: rsub [--host HOSTNAME:PORT] CHANNEL")
+		flag.PrintDefaults()
+	}
 	c, channel := rpubsub.BuildConn()
 	defer c.Close()
 
